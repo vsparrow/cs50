@@ -62,14 +62,14 @@ int main(int argc, char *argv[])
         {
             //get key shift
             bool caps = false;
-            int keyMinusByThisInt = 97; //default lower case; 97 refers to int value of 'a'
+            int intValueOfAa = 97; //default lower case; 97 refers to int value of 'a'
             if (plaintext[i] >= 'A' && plaintext[i] <= 'Z')
             {
                 caps = true;
-                keyMinusByThisInt = 65; //refer to int value of 'A'
+                intValueOfAa = 65; //refer to int value of 'A'
             }
 
-            int keyShift = argv[1][keyCounter] - keyMinusByThisInt;
+            int keyShift = argv[1][keyCounter] - intValueOfAa;
             printf("(%i %c) ",keyShift,argv[1][keyCounter]);
 
 
