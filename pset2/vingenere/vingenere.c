@@ -69,22 +69,43 @@ int main(int argc, char *argv[])
                 intValueOfAa = 65; //refer to int value of 'A'
             }
 
-            int keyShift = argv[1][keyCounter] - intValueOfAa;
+            // int keyShift = argv[1][keyCounter] - intValueOfAa;
+            int keyShift = 0;
+            if (argv[1][keyCounter] >= 'A' && argv[1][keyCounter] <= 'Z')
+            {
+                keyShift = argv[1][keyCounter] - 65;
+            }
+            else
+            {
+               keyShift =  argv[1][keyCounter] - 97;
+            }
+
             printf("(%i %c ",keyShift,argv[1][keyCounter]);
 
             //****************************************************************shift the characters here
-            int intValueOfZz = 122; //default lower case
-            if (caps)
+            // int intValueOfZz = 122; //default lower case
+            // if (caps)
+            // {
+            //     intValueOfZz = 90;
+            // }
+            // int newIntValueOfChar =  plaintext[i] + keyShift - intValueOfAa;
+            int newIntValueOfChar =  0;
+            if (plaintext[i] >= 'A' && plaintext[i] <= 'Z')
             {
-                intValueOfZz = 90;
+                newIntValueOfChar = plaintext[i] + keyShift - 65;
             }
-            int newIntValueOfChar =  plaintext[i] + keyShift - intValueOfAa;
+            else
+            {
+                newIntValueOfChar = plaintext[i] + keyShift - 97;
+            }
+
+
             if(newIntValueOfChar > 25)
             {
-                newIntValueOfChar = newIntValueOfChar % 25 -1;
+                newIntValueOfChar = newIntValueOfChar % 25 - 1;
             }
             plaintext[i] = intValueOfAa+newIntValueOfChar;
-            printf("%c )", plaintext[i]);
+            printf("%c )\n", plaintext[i]);
             //****************************************************************
 
 
