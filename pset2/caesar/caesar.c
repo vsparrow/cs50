@@ -11,21 +11,23 @@ int main(int argv, char* argc[])
         printf("Error must include only 1 argument, some non-negative int.\n");
         return 1;
     }
-    printf("%s\n",argc[1]);
+    // printf("%s\n",argc[1]);
     //convert the input character into an integer
     int key = atoi(argc[1]);
     //mod key by 26
     key = key % 26;
-    printf("\nkey is: %i\n",key);
+    // printf("\nkey is: %i\n",key);
     // output plaintext: (without a newline) and then prompt the user for a string of plaintext (using get_string).
     char* plaintext = get_string("plaintext:");
-    printf("\n%s\n",plaintext);
-    printf("\naplus 1 is: %c\n", 'a'+1);
+    // printf("\n%s\n",plaintext);
+    // printf("\naplus 1 is: %c\n", 'a'+1);
 
     // must preserve case:
     //cycle through each character:
     int length = (int)strlen(plaintext);
     int i=0;
+    // output ciphertext: (without a newline) followed by the plaintext’s corresponding ciphertext
+    printf("ciphertext: ");
     for(  i=0; i<length;i++ )
     {
         // int cipherint = plaintext[i] + key;
@@ -33,7 +35,7 @@ int main(int argv, char* argc[])
         int zvalue = 0;
         int avalue = 0;
         // printf(" %i ",i);
-        printf("\n%c %i", plaintext[i],(plaintext[i] + key - 97));
+        // printf("\n%c %i", plaintext[i],(plaintext[i] + key - 97));
         if(plaintext[i] >= 'a' && plaintext[i] <= 'z')
         {
             cipherint = plaintext[i] + key;
@@ -60,11 +62,12 @@ int main(int argv, char* argc[])
 
             // printf(" CAPS ");
         }
-        printf(" %i %c", cipherint, cipherint);
+        // printf(" %i %c", cipherint, cipherint);
+        printf("%c", cipherint);
     }
-    // output ciphertext: (without a newline) followed by the plaintext’s corresponding ciphertext,
+
 
     // After outputting ciphertext, you should print a newline.
-
+    printf("\n");
     return 0; //default
 }
