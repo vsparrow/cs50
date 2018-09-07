@@ -10,7 +10,10 @@ int main(int argv, char* argc[])
         printf("Error must include only 1 argument, some non-negative int.\n");
         return 1;
     }
-    printf("\n%s\n",argc[0]);
+    printf("%s\n",argc[1]);
+    //convert the input character into an integer
+    int key = atoi(argc[1]);
+    printf("\nkey is: %i:",key);
     // output plaintext: (without a newline) and then prompt the user for a string of plaintext (using get_string).
 
     // must preserve case:
