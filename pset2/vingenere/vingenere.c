@@ -9,7 +9,6 @@
 // accept a single command-line argument: a keyword, k, composed entirely of alphabetical characters.
 int main(int argc, char *argv[])
 {
-    // printf("%i %s\n",argc, argv[0]);
 
     // If your program is executed without any command-line arguments, with more than one command-line argument exit
     // your program should print an error (of your choice) and exit immediately, with main returning 1 (thereby signifying an error).
@@ -29,12 +28,11 @@ int main(int argc, char *argv[])
                 return 1;
             }
         }
-        // printf("%c ", (argv[1][i]));
     }
-    // printf("\n");
+
     // prompt the user for a string of plaintext, p, (as by a prompt for plaintext:)
     string plaintext = get_string("plaintext: ");
-    printf("\n%s\n", plaintext);
+
     // encrypt according to Vigenère’s cipher with k,
     // only apply Vigenère’s cipher to a character in p if that character is a letter.
     // All other characters (numbers, symbols, spaces, punctuation marks, etc.) must be outputted unchanged
@@ -47,18 +45,16 @@ int main(int argc, char *argv[])
     {
         bool isAlpha = true;
         //check if  char is  non-alphabetical character,
-        // for (int j=0; j < strlen(argv[1]); j++)
-        // {
-            if (plaintext[i] < 'a' || plaintext[i] > 'z')
+        if (plaintext[i] < 'a' || plaintext[i] > 'z')
+        {
+            if (plaintext[i] < 'A' || plaintext[i] > 'Z')
             {
-                if (plaintext[i] < 'A' || plaintext[i] > 'Z')
-                {
-                    isAlpha = false;
-                }
+                isAlpha = false;
             }
-        // }
+        }
 
-        if(isAlpha)             //do this work only if element is alphabetical
+
+        if (isAlpha)             //do this work only if element is alphabetical
         {
             //get key shift
             bool caps = false;
@@ -80,7 +76,6 @@ int main(int argc, char *argv[])
                keyShift =  argv[1][keyCounter] - 97;
             }
 
-            printf("(%i %c ",keyShift,argv[1][keyCounter]);
 
             //****************************************************************shift the characters here
             // int intValueOfZz = 122; //default lower case
@@ -105,9 +100,7 @@ int main(int argc, char *argv[])
                 newIntValueOfChar = newIntValueOfChar % 25 - 1;
             }
             plaintext[i] = intValueOfAa+newIntValueOfChar;
-            printf("%c )\n", plaintext[i]);
             //****************************************************************
-
 
 
             //cycle through key elements via counter
@@ -120,13 +113,13 @@ int main(int argc, char *argv[])
                keyCounter++;
             }
         } //end if isAlpha
-        else    //remove this else, testing only
-        {
-            printf("(%c) ", argv[1][i]);
-        }
+        // else    //remove this else, testing only
+        // {
+        //     printf("(%c) ", argv[1][i]);
+        // }
     }
     //  printing the result (prepended with ciphertext: and ending with a newline)
-    printf("\n");
+    // printf("\n");
     printf("ciphertext: ");
     for(int i=0; i< strlen(plaintext); i++)
     {
