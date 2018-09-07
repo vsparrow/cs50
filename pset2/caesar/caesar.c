@@ -28,20 +28,27 @@ int main(int argv, char* argc[])
     int i=0;
     for(  i=0; i<length;i++ )
     {
+        int cipherint = plaintext[i] + key;
+        int zvalue = 0;
+        int avalue = 0;
         // printf(" %i ",i);
         printf("\n%c %i", plaintext[i],(plaintext[i] + key - 97));
         if(plaintext[i] >= 'a' && plaintext[i] <= 'z')
         {
-            int cipherint = plaintext[i] + key;
+            zvalue = 122;
+            avalue = 96;
             if(cipherint > 122) //greater than z, over flow
             {
-                cipherint = cipherint - 122 + 96;
+                // cipherint = cipherint - 122 + 96;
+                cipherint = cipherint - zvalue + avalue;
             }
             // printf(" %i lowercase \n", cipherint);
             printf(" %i %c", cipherint, cipherint);
         }
         if(plaintext[i] >= 'A' && plaintext[i] <= 'Z')
         {
+
+
             printf(" CAPS ");
         }
     }
