@@ -70,7 +70,23 @@ int main(int argc, char *argv[])
             }
 
             int keyShift = argv[1][keyCounter] - intValueOfAa;
-            printf("(%i %c) ",keyShift,argv[1][keyCounter]);
+            printf("(%i %c ",keyShift,argv[1][keyCounter]);
+
+            //****************************************************************shift the characters here
+            int intValueOfZz = 122; //default lower case
+            if (caps)
+            {
+                intValueOfZz = 90;
+            }
+            int newIntValueOfChar =  plaintext[i] + keyShift - intValueOfAa;
+            if(newIntValueOfChar > 25)
+            {
+                newIntValueOfChar = newIntValueOfChar % 25 -1;
+            }
+            plaintext[i] = intValueOfAa+newIntValueOfChar;
+            printf("%c )", plaintext[i]);
+            //****************************************************************
+
 
 
             //cycle through key elements via counter
@@ -88,6 +104,14 @@ int main(int argc, char *argv[])
             printf("(%c) ", argv[1][i]);
         }
     }
-//  printing the result (prepended with ciphertext: and ending with a newline)
-//  exiting, with main returning 0.
+    //  printing the result (prepended with ciphertext: and ending with a newline)
+    printf("\n");
+    printf("ciphertext: ");
+    for(int i=0; i< strlen(plaintext); i++)
+    {
+        printf("%c", plaintext[i]);
+    }
+    printf("\n");
+    //  exiting, with main returning 0.
+    return 0;
 }
