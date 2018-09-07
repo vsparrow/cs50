@@ -45,27 +45,47 @@ int main(int argc, char *argv[])
     int keySize = strlen(argv[1]);
     for (int i=0; i<strlen(plaintext); i++)
     {
-        //get key shift
-        bool caps = false;
-        int keyMinusByThisInt = 97; //default lower case; 97 refers to int value of 'a'
-        if (argv[1][i] >= 'A' && argv[1][i] <= 'Z')
-        {
-            caps = true;
-            keyMinusByThisInt = 65; //refer to int value of 'A'
-        }
+        bool isAlpha = true;
+        //check if  char is  non-alphabetical character,
+        // for (int j=0; j < strlen(argv[1]); j++)
+        // {
+            if (plaintext[i] < 'a' || plaintext[i] > 'z')
+            {
+                if (plaintext[i] < 'A' || plaintext[i] > 'Z')
+                {
+                    isAlpha = false;
+                }
+            }
+        // }
 
-        int keyShift = argv[1][keyCounter] - keyMinusByThisInt;
-        printf("(%i %c) ",keyShift,argv[1][keyCounter]);
+        if(isAlpha)             //do this work only if element is alphabetical
+        {
+            //get key shift
+            bool caps = false;
+            int keyMinusByThisInt = 97; //default lower case; 97 refers to int value of 'a'
+            if (plaintext[i] >= 'A' && plaintext[i] <= 'Z')
+            {
+                caps = true;
+                keyMinusByThisInt = 65; //refer to int value of 'A'
+            }
+
+            int keyShift = argv[1][keyCounter] - keyMinusByThisInt;
+            printf("(%i %c) ",keyShift,argv[1][keyCounter]);
 
 
-        //cycle through key elements via counter
-        if (keyCounter == keySize-1)    //keySize -1 because the last char in a string is always \0
+            //cycle through key elements via counter
+            if (keyCounter == keySize-1)    //keySize -1 because the last char in a string is always \0
+            {
+                keyCounter = 0;
+            }
+            else
+            {
+               keyCounter++;
+            }
+        } //end if isAlpha
+        else    //remove this else, testing only
         {
-            keyCounter = 0;
-        }
-        else
-        {
-           keyCounter++;
+            printf("(%c) ", argv[1][i]);
         }
     }
 //  printing the result (prepended with ciphertext: and ending with a newline)
