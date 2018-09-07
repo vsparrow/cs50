@@ -49,9 +49,16 @@ int main(int argv, char* argc[])
         }
         if(plaintext[i] >= 'A' && plaintext[i] <= 'Z')
         {
+            cipherint = plaintext[i] + key;
+            zvalue = 90;
+            avalue = 65;
+            if(cipherint > 90) //greater than z, over flow
+            {
+                // cipherint = cipherint - 122 + 96;
+                cipherint = cipherint - zvalue + avalue;
+            }
 
-
-            printf(" CAPS ");
+            // printf(" CAPS ");
         }
         printf(" %i %c", cipherint, cipherint);
     }
