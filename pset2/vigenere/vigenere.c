@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
         return 1;
     }
     //check if  key contains any non-alphabetical character,
-    for (int i=0; i < strlen(argv[1]); i++)
+    for (int i = 0; i < strlen(argv[1]); i++)
     {
         if (argv[1][i] < 'a' || argv[1][i] > 'z')
         {
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     // BUT preserve case
     int keyCounter = 0;
     int keySize = strlen(argv[1]);
-    for (int i=0; i<strlen(plaintext); i++)
+    for (int i = 0; i < strlen(plaintext); i++)
     {
         bool isAlpha = true;
         //check if  char is  non-alphabetical character,
@@ -52,7 +52,6 @@ int main(int argc, char *argv[])
                 isAlpha = false;
             }
         }
-
 
         if (isAlpha)             //do this work only if element is alphabetical
         {
@@ -65,7 +64,6 @@ int main(int argc, char *argv[])
                 intValueOfAa = 65; //refer to int value of 'A'
             }
 
-            // int keyShift = argv[1][keyCounter] - intValueOfAa;
             int keyShift = 0;
             if (argv[1][keyCounter] >= 'A' && argv[1][keyCounter] <= 'Z')
             {
@@ -73,17 +71,11 @@ int main(int argc, char *argv[])
             }
             else
             {
-               keyShift =  argv[1][keyCounter] - 97;
+                keyShift =  argv[1][keyCounter] - 97;
             }
 
 
             //****************************************************************shift the characters here
-            // int intValueOfZz = 122; //default lower case
-            // if (caps)
-            // {
-            //     intValueOfZz = 90;
-            // }
-            // int newIntValueOfChar =  plaintext[i] + keyShift - intValueOfAa;
             int newIntValueOfChar =  0;
             if (plaintext[i] >= 'A' && plaintext[i] <= 'Z')
             {
@@ -95,33 +87,27 @@ int main(int argc, char *argv[])
             }
 
 
-            if(newIntValueOfChar > 25)
+            if (newIntValueOfChar > 25)
             {
                 newIntValueOfChar = newIntValueOfChar % 25 - 1;
             }
-            plaintext[i] = intValueOfAa+newIntValueOfChar;
+            plaintext[i] = intValueOfAa + newIntValueOfChar;
             //****************************************************************
 
-
             //cycle through key elements via counter
-            if (keyCounter == keySize-1)    //keySize -1 because the last char in a string is always \0
+            if (keyCounter == keySize - 1)    // minus 1 because the last char in a string is always \0
             {
                 keyCounter = 0;
             }
             else
             {
-               keyCounter++;
+                keyCounter++;
             }
         } //end if isAlpha
-        // else    //remove this else, testing only
-        // {
-        //     printf("(%c) ", argv[1][i]);
-        // }
     }
     //  printing the result (prepended with ciphertext: and ending with a newline)
-    // printf("\n");
     printf("ciphertext: ");
-    for(int i=0; i< strlen(plaintext); i++)
+    for (int i = 0; i < strlen(plaintext); i++)
     {
         printf("%c", plaintext[i]);
     }
