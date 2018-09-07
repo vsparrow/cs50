@@ -3,69 +3,55 @@
 #include <string.h>
 
 //Your program must accept a single command-line argument, a non-negative integer.
-int main(int argv, char* argc[])
+int main(int argv, char *argc[])
 {
     //If no args or more than 1 arg, printf somme error, return 1
-    if(argv != 2)
+    if (argv != 2)
     {
-        printf("Error must include only 1 argument, some non-negative int.\n");
+        printf("Usage: ./caesar k");
         return 1;
     }
-    // printf("%s\n",argc[1]);
     //convert the input character into an integer
     int key = atoi(argc[1]);
     //mod key by 26
     key = key % 26;
-    // printf("\nkey is: %i\n",key);
-    // output plaintext: (without a newline) and then prompt the user for a string of plaintext (using get_string).
-    char* plaintext = get_string("plaintext:");
-    // printf("\n%s\n",plaintext);
-    // printf("\naplus 1 is: %c\n", 'a'+1);
 
+    //*****************************************************************************************
+    // output plaintext: (without a newline) and then prompt the user for a string of plaintext (using get_string).
     // must preserve case:
-    //cycle through each character:
+    char *plaintext = get_string("plaintext:");
     int length = (int)strlen(plaintext);
-    int i=0;
+    int i = 0;
     // output ciphertext: (without a newline) followed by the plaintext’s corresponding ciphertext
     printf("ciphertext: ");
-    for(  i=0; i<length;i++ )
+    for (i = 0; i < length; i++)
     {
-        // int cipherint = plaintext[i] + key;
         int cipherint = plaintext[i];
         int zvalue = 0;
         int avalue = 0;
-        // printf(" %i ",i);
-        // printf("\n%c %i", plaintext[i],(plaintext[i] + key - 97));
-        if(plaintext[i] >= 'a' && plaintext[i] <= 'z')
+        if (plaintext[i] >= 'a' && plaintext[i] <= 'z')
         {
             cipherint = plaintext[i] + key;
             zvalue = 122;
             avalue = 96;
-            if(cipherint > 122) //greater than z, over flow
+            if (cipherint > 122) //greater than z, over flow
             {
-                // cipherint = cipherint - 122 + 96;
                 cipherint = cipherint - zvalue + avalue;
             }
-            // printf(" %i lowercase \n", cipherint);
-
         }
-        if(plaintext[i] >= 'A' && plaintext[i] <= 'Z')
+        if (plaintext[i] >= 'A' && plaintext[i] <= 'Z')
         {
             cipherint = plaintext[i] + key;
             zvalue = 90;
             avalue = 65;
-            if(cipherint > 90) //greater than z, over flow
+            if (cipherint > 90) //greater than z, over flow
             {
-                // cipherint = cipherint - 122 + 96;
                 cipherint = cipherint - zvalue + avalue;
             }
-
-            // printf(" CAPS ");
         }
-        // printf(" %i %c", cipherint, cipherint);
         printf("%c", cipherint);
     }
-
+    //*****************************************************************************************
 
     // After outputting ciphertext, you should print a newline.
     printf("\n");
