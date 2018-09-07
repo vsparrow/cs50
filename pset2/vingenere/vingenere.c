@@ -9,7 +9,7 @@
 // accept a single command-line argument: a keyword, k, composed entirely of alphabetical characters.
 int main(int argc, char *argv[])
 {
-    printf("%i %s\n",argc, argv[0]);
+    // printf("%i %s\n",argc, argv[0]);
 
     // If your program is executed without any command-line arguments, with more than one command-line argument exit
     // your program should print an error (of your choice) and exit immediately, with main returning 1 (thereby signifying an error).
@@ -19,28 +19,55 @@ int main(int argc, char *argv[])
         return 1;
     }
     //check if  key contains any non-alphabetical character,
-    for(int i=0; i < strlen(argv[1]); i++)
+    for (int i=0; i < strlen(argv[1]); i++)
     {
-        if(argv[1][i] < 'a' || argv[1][i] > 'z')
+        if (argv[1][i] < 'a' || argv[1][i] > 'z')
         {
-            if(argv[1][i] < 'A' || argv[1][i] > 'Z')
+            if (argv[1][i] < 'A' || argv[1][i] > 'Z')
             {
                 printf("ERROR: key should only contain alphabetical characters\n");
                 return 1;
             }
         }
-        printf("%c ", (argv[1][i]));
+        // printf("%c ", (argv[1][i]));
     }
-    printf("\n");
-// proceed to prompt the user for a string of plaintext, p, (as by a prompt for plaintext:)
-// With respect to the characters in k, you must treat A and a as 0, B and b as 1, ... , and Z and z as 25.
-// BUT preserve case
+    // printf("\n");
+    // prompt the user for a string of plaintext, p, (as by a prompt for plaintext:)
+    string plaintext = get_string("plaintext: ");
+    printf("\n%s\n", plaintext);
+    // encrypt according to Vigenère’s cipher with k,
+    // only apply Vigenère’s cipher to a character in p if that character is a letter.
+    // All other characters (numbers, symbols, spaces, punctuation marks, etc.) must be outputted unchanged
+    // apply key to only valid chars, current key must not change if invalid char, wait for next valid char to apply key
+    // With respect to the characters in k, you must treat A and a as 0, B and b as 1, ... , and Z and z as 25.
+    // BUT preserve case
+    int keyCounter = 0;
+    int keySize = strlen(argv[1]);
+    for (int i=0; i<strlen(plaintext); i++)
+    {
+        //get key shift
+        bool caps = false;
+        int keyMinusByThisInt = 97; //default lower case; 97 refers to int value of 'a'
+        if (argv[1][i] >= 'A' && argv[1][i] <= 'Z')
+        {
+            caps = true;
+            keyMinusByThisInt = 65; //refer to int value of 'A'
+        }
 
-//  encrypt according to Vigenère’s cipher with k,
-// only apply Vigenère’s cipher to a character in p if that character is a letter.
-// All other characters (numbers, symbols, spaces, punctuation marks, etc.) must be outputted unchanged
-// apply key to only valid chars, current key must not change if invalid char, wait for next valid char to apply key
+        int keyShift = argv[1][keyCounter] - keyMinusByThisInt;
+        printf("(%i %c) ",keyShift,argv[1][keyCounter]);
 
+
+        //cycle through key elements via counter
+        if (keyCounter == keySize-1)    //keySize -1 because the last char in a string is always \0
+        {
+            keyCounter = 0;
+        }
+        else
+        {
+           keyCounter++;
+        }
+    }
 //  printing the result (prepended with ciphertext: and ending with a newline)
 //  exiting, with main returning 0.
 }
