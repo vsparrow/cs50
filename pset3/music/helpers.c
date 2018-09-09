@@ -90,6 +90,21 @@ int frequency(string note)
     }
 
     printf("\nIN FRQUENCY:octive and Note: (%i) (%s)\n",octive,noteOnly);
+
+    //**********************************now calc the frquency
+    //Only implement support initially for A0 through A8, no other notes.
+    int multiplyOrDivide = 4 - octive;
+    int currentFreq = 440; //standard for a4
+    // if ( multiplyOrDivide == 0) //do nothing
+    if (multiplyOrDivide < 0)   //we need to  440 * x * 2
+    {
+        currentFreq = currentFreq * -2 * multiplyOrDivide; // 440 * -2 * multiplyOrDivide, the teo negatives cancel each other
+    }
+    else if (multiplyOrDivide > 0)
+    {
+        currentFreq = currentFreq / 2 / multiplyOrDivide;
+    }
+    printf("(currentFreq is %i)", currentFreq);
     //a#4 or a4
     //  note is a#4 or a
     //  octive is 4
@@ -138,7 +153,7 @@ int main(void)
     // int d = duration( "fraction");
     int d = duration( "1/4");
     // int f = frequency( "note");
-    int f = frequency( "a#4");
+    int f = frequency( "a#3");
     bool r = is_rest( "");
     // bool r = is_rest(test1s);
 
