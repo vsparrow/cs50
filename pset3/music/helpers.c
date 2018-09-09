@@ -50,6 +50,66 @@ int duration(string fraction)
 // Calculates frequency (in Hz) of a note
 int frequency(string note)
 {
+    bool sharp = false; //#
+    bool flat = false;  //b
+    int octive = 0;
+    char noteOnly[3] = "\0";
+    if (note[1] == '#')
+    {
+        sharp = true;
+    }
+    else if (note[1] == 'b')
+    {
+        flat = true;
+    }
+    //else no sharp or otive
+    if (!sharp && !flat)
+    {
+        printf("(octive in string is %c)", note[1]);
+        // char temp = note[1] - 0;
+        // octive = temp - 0;
+        char temp[2];
+        temp[0]= note[1];
+        temp[1]='\0';
+        octive = atoi(temp);
+        noteOnly[0]=note[0];
+        noteOnly[1]='\0';
+    }
+    else
+    {
+        printf("(octive in string is %c)", note[2]);
+        // char temp = note[2] - 0;
+        // octive = temp - 0;
+        char temp[2];
+        temp[0]= note[2];
+        temp[1]='\0';
+        octive = atoi(temp);
+        noteOnly[0]=note[0];
+        noteOnly[1]=note[1];
+        noteOnly[2]='\0';
+    }
+
+    printf("\nIN FRQUENCY:octive and Note: (%i) (%s)\n",octive,noteOnly);
+    //a#4 or a4
+    //  note is a#4 or a
+    //  octive is 4
+    //what is the frquency of hte note?
+    // a4 is 440
+    // every semi tone up multiply by 2^1/12
+    // every semi tone down divide by 2^1/12
+    // a a#/ab b c c#/db d d#/eb e f f#/gb g g#/abnext
+    // example g# would be 440 * 2^11/12 because it is 11 spaces away from a
+    // example2     a5 would be 44 * 12/12 because it is 12 spaces away
+    //  every a up is 12/12 away, so a6  would be 400* 2^24/12
+    //  or you could just say every octive up, multiply by 2, a4=440 a5=880, a6 = 1760 and viceversa a3 would be 440/2 a2 is 440/4, a1 is 440/8
+
+    //notes could be #sharp or bflat so account for flats   this is called "accidentals"
+    // so note[1] could be an "accidental"(# or b) or it could be an octive(4,5,6,etc)
+    //  side note: if note[1] is an octive, that is called a "natural" note
+
+    //suggested first adjust for sharps and flats, then adjust for octives, but can also do reverse
+    // more notes: octives start at c! so the order of octive 4 is cdrfgab  weird right!
+
     // TODO
     printf("%s ",note);
     return 0;
@@ -77,7 +137,8 @@ int main(void)
     // string test1s = get_string("enter some string:");
     // int d = duration( "fraction");
     int d = duration( "1/4");
-    int f = frequency( "note");
+    // int f = frequency( "note");
+    int f = frequency( "a#4");
     bool r = is_rest( "");
     // bool r = is_rest(test1s);
 
