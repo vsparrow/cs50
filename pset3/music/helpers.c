@@ -1,12 +1,17 @@
 // Helper functions for music
 
+//already added:
 #include <cs50.h>
+#include "helpers.h"
+//needed for round
+#include <math.h>
 
-//console this out
+//console this out below:
 #include <stdio.h>
 #include <string.h>
 
-#include "helpers.h"
+
+
 
 // Converts a fraction formatted as X/Y to eighths
 int duration(string fraction)
@@ -30,8 +35,15 @@ int duration(string fraction)
     {
         return a;
     }
+    //algo for converting dec to fraction here:
+    //https://www.mathsisfun.com/converting-decimals-fractions.html
     float c = a/b;
-    printf("%f ", c);
+    c = c * 100;
+    c = c / 25 * 2;
+    int d = (int) round(c);
+    printf("[%f %i] ", c, d);
+    return d;
+
     return 0;
 }
 
