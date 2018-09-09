@@ -15,7 +15,23 @@ int duration(string fraction)
     // string a fraction and convert it into some int number of eighths
     //  only be passed a string formatted as X/Y,
     //  X and Y is a positive digit, and Y is, moreover, a power of 2.
-    printf("%s ",fraction);
+    // printf("%s ",fraction);
+    // 1/4 and return as an int a corresponding number of eigths
+    // 2, in this case, since 1/4 is equivalent to 2/8)
+
+    // printf("%c ",fraction[0]);
+    // printf("%c ",fraction[1]);
+    // printf("%c ",fraction[2]);
+    float a = fraction[0] - '0';
+    float b = fraction[2] - '0';
+    // printf("(a is %i) ",a);
+    // printf("(b is %i) ",b);
+    if(b == 8)
+    {
+        return a;
+    }
+    float c = a/b;
+    printf("%f ", c);
     return 0;
 }
 
@@ -46,11 +62,12 @@ bool is_rest(string s)
 
 int main(void)
 {
-    string test1s = get_string("enter some string:");
-    int d = duration( "fraction");
+    // string test1s = get_string("enter some string:");
+    // int d = duration( "fraction");
+    int d = duration( "1/4");
     int f = frequency( "note");
-    // bool r = is_rest( "");
-    bool r = is_rest(test1s);
+    bool r = is_rest( "");
+    // bool r = is_rest(test1s);
 
     printf("\n%i %i %d ", d, f, r);
     printf("test\n");
