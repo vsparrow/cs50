@@ -91,9 +91,9 @@ int frequency(string note)
         noteOnly[0]=note[0];
         noteOnly[1]=note[1];
         noteOnly[2]='\0';
-        printf("\nBEFORE: %i",noteIntVal);
+        // printf("\nBEFORE: %i",noteIntVal);
         noteIntVal += (note[0] - 0);
-        printf("\nAFTER: %i\n",noteIntVal);
+        // printf("\nAFTER: %i\n",noteIntVal);
     }
 
     // printf("\nIN FRQUENCY:octive and Note: (%i) (%s)\n",octive,noteOnly);
@@ -117,50 +117,52 @@ int frequency(string note)
     // printf("\n%i\n", 'C'-0 + '#' - 0);// 102
     // printf("\n%i\n",  '#' - 0); //35
     // printf("\n%i\n",  'b' - 0); //98
-    printf("NOTE IN VAL IS:  %i !!", noteIntVal);
+    // printf("NOTE IN VAL IS:  %i !!", noteIntVal);
     //order is:     //  c c#/db d d#/eb e f f#/gb g g#/Ab a a#/Bb b
     switch(noteIntVal)
     {
         case 66: //B
-            currentFreq = ((double) currentFreq) * pow(2.0,((double) 2)/12);
+            currentFreq = round( ((double) currentFreq) * pow(2.0,((double) 2)/((double) 12)));
             break;
         case 164: //Bb  66+98
         case 100: //A#  65+35
-            currentFreq = ((double) currentFreq) * pow(2.0,((double) 1)/12);
+            // printf(" %f ",((double) currentFreq) * pow(2.0,((double) 1)/((double) 12)));
+            currentFreq = round( ((double) currentFreq) * pow(2.0,((double) 1)/((double) 12)));
             break;
         //DO NOTHING FOR A
         case 163: //Ab  65+98
-        case 96: //G#  71+35
-            currentFreq = ((double) currentFreq) / pow(2.0,((double) 1)/12);
+        case 106: //G#  71+35
+            // printf(" %f ",((double) currentFreq) / pow(2.0,((double) 1)/((double) 12)));
+            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 1)/((double) 12)));
             break;
         case 71: //G
-            currentFreq = ((double) currentFreq)  / pow(2.0,((double) 2)/12);
+            currentFreq = round( ((double) currentFreq)  / pow(2.0,((double) 2)/((double) 12)));
             break;
         case 169: //Gb  71+98
         case 105: //F#  70+35
-            currentFreq = ((double) currentFreq) / pow(2.0,((double) 3)/12);
+            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 3)/((double) 12)));
             break;
         case 70: //F
-            currentFreq = ((double) currentFreq) / pow(2.0,((double) 4)/12);
+            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 4)/((double) 12)));
             break;
         case 69: //E
-            currentFreq = ((double) currentFreq) / pow(2.0,((double) 5)/12);
+            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 5)/((double) 12)));
             break;
         case 167: //Eb  69+98
         case 103: //D#  68+35
-            currentFreq = ((double) currentFreq) / pow(2.0,((double) 6)/12);
+            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 6)/((double) 12)));
             break;
         //order is:     //  c c#/db d d#/eb e f f#/gb g g#/Ab a a#/Bb b
 
         case 68: //D
-            currentFreq = ((double) currentFreq) / pow(2.0,((double) 7)/12);
+            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 7)/((double) 12)));
             break;
         case 166: //Db  68+98
         case 102: //C#  67+35
-            currentFreq = ((double) currentFreq) / pow(2.0,((double) 8)/12);
+            currentFreq =round(  ((double) currentFreq) / pow(2.0,((double) 8)/((double) 12)));
             break;
         case 67: //C
-            currentFreq = ((double) currentFreq) / pow(2.0,((double) 9)/12);
+            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 9)/((double) 12)));
             break;
     }
     // printf("POWER:  %f ",pow(2.0,((double) 2)/12));
@@ -209,18 +211,18 @@ bool is_rest(string s)
 }
 
 
-int main(void)
-{
-    // string test1s = get_string("enter some string:");
-    // int d = duration( "fraction");
-    int d = duration( "1/4");
-    // int f = frequency( "note");
-    int f = frequency( "A#5");
-    bool r = is_rest( "");
-    // bool r = is_rest(test1s);
+// int main(void)
+// {
+//     // string test1s = get_string("enter some string:");
+//     // int d = duration( "fraction");
+//     int d = duration( "1/4");
+//     // int f = frequency( "note");
+//     int f = frequency( "A#5");
+//     bool r = is_rest( "");
+//     // bool r = is_rest(test1s);
 
-    printf("%i %i %d ", d, f, r);
-    printf("\n%i\n",f);
-    // printf("test\n");
-    return 0;
-}
+//     printf("%i %i %d ", d, f, r);
+//     printf("\n%i\n",f);
+//     // printf("test\n");
+//     return 0;
+// }
