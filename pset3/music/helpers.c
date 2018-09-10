@@ -54,13 +54,16 @@ int frequency(string note)
     bool flat = false;  //b
     int octive = 0;
     char noteOnly[3] = "\0";
+    int noteIntVal = 0;
     if (note[1] == '#')
     {
         sharp = true;
+        noteIntVal += 35;
     }
     else if (note[1] == 'b')
     {
         flat = true;
+        noteIntVal += 98;
     }
     //else no sharp or otive
     if (!sharp && !flat)
@@ -74,6 +77,7 @@ int frequency(string note)
         octive = atoi(temp);
         noteOnly[0]=note[0];
         noteOnly[1]='\0';
+        noteIntVal += note[0] - 0;
     }
     else
     {
@@ -87,6 +91,7 @@ int frequency(string note)
         noteOnly[0]=note[0];
         noteOnly[1]=note[1];
         noteOnly[2]='\0';
+        noteIntVal += note[1] - 0;
     }
 
     printf("\nIN FRQUENCY:octive and Note: (%i) (%s)\n",octive,noteOnly);
@@ -105,6 +110,60 @@ int frequency(string note)
         currentFreq = currentFreq / 2 / multiplyOrDivide;
     }
     printf("(currentFreq is %i)", currentFreq);
+
+    printf("\n%i\n", 'C'-0); //67
+    printf("\n%i\n", 'C'-0 + '#' - 0);// 102
+    printf("\n%i\n",  '#' - 0); //35
+    printf("\n%i\n",  'b' - 0); //98
+    printf("NOTE IN VAL IS:  %i !!", noteIntVal);
+    //order is:     //  c c#/db d d#/eb e f f#/gb g g#/Ab a a#/Bb b
+    switch(noteIntVal)
+    {
+        case 66: //B
+            currentFreq = ((double) currentFreq) * pow(2.0,((double) 2)/12);
+            break;
+        case 164: //Bb  66+98
+        case 100: //A#  65+35
+            currentFreq = ((double) currentFreq) * pow(2.0,((double) 1)/12);
+            break;
+        //DO NOTHING FOR A
+        case 163: //Ab  65+98
+        case 96: //G#  71+35
+            currentFreq = ((double) currentFreq) / pow(2.0,((double) 1)/12);
+            break;
+        case 71: //G
+            currentFreq = ((double) currentFreq)  / pow(2.0,((double) 2)/12);
+            break;
+        case 169: //Gb  71+98
+        case 105: //F#  70+35
+            currentFreq = ((double) currentFreq) / pow(2.0,((double) 3)/12);
+            break;
+        case 70: //F
+            currentFreq = ((double) currentFreq) / pow(2.0,((double) 4)/12);
+            break;
+        case 69: //E
+            currentFreq = ((double) currentFreq) / pow(2.0,((double) 5)/12);
+            break;
+        case 167: //Eb  69+98
+        case 103: //D#  68+35
+            currentFreq = ((double) currentFreq) / pow(2.0,((double) 6)/12);
+            break;
+        //order is:     //  c c#/db d d#/eb e f f#/gb g g#/Ab a a#/Bb b
+
+        case 68: //D
+            currentFreq = ((double) currentFreq) / pow(2.0,((double) 7)/12);
+            break;
+        case 166: //Db  68+98
+        case 102: //C#  67+35
+            currentFreq = ((double) currentFreq) / pow(2.0,((double) 8)/12);
+            break;
+        case 67: //C
+            currentFreq = ((double) currentFreq) / pow(2.0,((double) 9)/12);
+            break;
+    }
+    printf("POWER:  %f ",pow(2.0,((double) 2)/12));
+    printf("(FREQ after case is %i)", currentFreq);
+    // printf("(FREQ after case is %i)", currentFreq);
     //a#4 or a4
     //  note is a#4 or a
     //  octive is 4
@@ -112,7 +171,7 @@ int frequency(string note)
     // a4 is 440
     // every semi tone up multiply by 2^1/12
     // every semi tone down divide by 2^1/12
-    // a a#/ab b c c#/db d d#/eb e f f#/gb g g#/abnext
+    //  c c#/db d d#/eb e f f#/gb g g#/Ab a a#/Bb b
     // example g# would be 440 * 2^11/12 because it is 11 spaces away from a
     // example2     a5 would be 44 * 12/12 because it is 12 spaces away
     //  every a up is 12/12 away, so a6  would be 400* 2^24/12
@@ -127,6 +186,7 @@ int frequency(string note)
 
     // TODO
     printf("%s ",note);
+    return currentFreq;
     return 0;
 }
 
@@ -153,7 +213,7 @@ int main(void)
     // int d = duration( "fraction");
     int d = duration( "1/4");
     // int f = frequency( "note");
-    int f = frequency( "a#3");
+    int f = frequency( "A4");
     bool r = is_rest( "");
     // bool r = is_rest(test1s);
 
