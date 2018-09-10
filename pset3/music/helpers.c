@@ -31,13 +31,13 @@ int duration(string fraction)
     float b = fraction[2] - '0';
     // printf("(a is %i) ",a);
     // printf("(b is %i) ",b);
-    if(b == 8)
+    if (b == 8)
     {
         return a;
     }
     //algo for converting dec to fraction here:
     //https://www.mathsisfun.com/converting-decimals-fractions.html
-    float c = a/b;
+    float c = a / b;
     c = c * 100;
     c = c / 25 * 2;
     int d = (int) round(c);
@@ -72,11 +72,11 @@ int frequency(string note)
         // char temp = note[1] - 0;
         // octive = temp - 0;
         char temp[2];
-        temp[0]= note[1];
-        temp[1]='\0';
+        temp[0] = note[1];
+        temp[1] = '\0';
         octive = atoi(temp);
-        noteOnly[0]=note[0];
-        noteOnly[1]='\0';
+        noteOnly[0] = note[0];
+        noteOnly[1] = '\0';
         noteIntVal += note[0] - 0;
     }
     else
@@ -85,12 +85,12 @@ int frequency(string note)
         // char temp = note[2] - 0;
         // octive = temp - 0;
         char temp[2];
-        temp[0]= note[2];
-        temp[1]='\0';
+        temp[0] = note[2];
+        temp[1] = '\0';
         octive = atoi(temp);
-        noteOnly[0]=note[0];
-        noteOnly[1]=note[1];
-        noteOnly[2]='\0';
+        noteOnly[0] = note[0];
+        noteOnly[1] = note[1];
+        noteOnly[2] = '\0';
         // printf("\nBEFORE: %i",noteIntVal);
         noteIntVal += (note[0] - 0);
         // printf("\nAFTER: %i\n",noteIntVal);
@@ -119,50 +119,50 @@ int frequency(string note)
     // printf("\n%i\n",  'b' - 0); //98
     // printf("NOTE IN VAL IS:  %i !!", noteIntVal);
     //order is:     //  c c#/db d d#/eb e f f#/gb g g#/Ab a a#/Bb b
-    switch(noteIntVal)
+    switch (noteIntVal)
     {
         case 66: //B
-            currentFreq = round( ((double) currentFreq) * pow(2.0,((double) 2)/((double) 12)));
+            currentFreq = round(((double) currentFreq) * pow(2.0, ((double) 2) / ((double) 12)));
             break;
         case 164: //Bb  66+98
         case 100: //A#  65+35
             // printf(" %f ",((double) currentFreq) * pow(2.0,((double) 1)/((double) 12)));
-            currentFreq = round( ((double) currentFreq) * pow(2.0,((double) 1)/((double) 12)));
+            currentFreq = round(((double) currentFreq) * pow(2.0, ((double) 1) / ((double) 12)));
             break;
         //DO NOTHING FOR A
         case 163: //Ab  65+98
         case 106: //G#  71+35
             // printf(" %f ",((double) currentFreq) / pow(2.0,((double) 1)/((double) 12)));
-            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 1)/((double) 12)));
+            currentFreq = round(((double) currentFreq) / pow(2.0, ((double) 1) / ((double) 12)));
             break;
         case 71: //G
-            currentFreq = round( ((double) currentFreq)  / pow(2.0,((double) 2)/((double) 12)));
+            currentFreq = round(((double) currentFreq) / pow(2.0, ((double) 2) / ((double) 12)));
             break;
         case 169: //Gb  71+98
         case 105: //F#  70+35
-            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 3)/((double) 12)));
+            currentFreq = round(((double) currentFreq) / pow(2.0, ((double) 3) / ((double) 12)));
             break;
         case 70: //F
-            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 4)/((double) 12)));
+            currentFreq = round(((double) currentFreq) / pow(2.0, ((double) 4) / ((double) 12)));
             break;
         case 69: //E
-            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 5)/((double) 12)));
+            currentFreq = round(((double) currentFreq) / pow(2.0, ((double) 5) / ((double) 12)));
             break;
         case 167: //Eb  69+98
         case 103: //D#  68+35
-            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 6)/((double) 12)));
+            currentFreq = round(((double) currentFreq) / pow(2.0, ((double) 6) / ((double) 12)));
             break;
         //order is:     //  c c#/db d d#/eb e f f#/gb g g#/Ab a a#/Bb b
 
         case 68: //D
-            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 7)/((double) 12)));
+            currentFreq = round(((double) currentFreq) / pow(2.0, ((double) 7) / ((double) 12)));
             break;
         case 166: //Db  68+98
         case 102: //C#  67+35
-            currentFreq =round(  ((double) currentFreq) / pow(2.0,((double) 8)/((double) 12)));
+            currentFreq = round(((double) currentFreq) / pow(2.0, ((double) 8) / ((double) 12)));
             break;
         case 67: //C
-            currentFreq = round( ((double) currentFreq) / pow(2.0,((double) 9)/((double) 12)));
+            currentFreq = round(((double) currentFreq) / pow(2.0, ((double) 9) / ((double) 12)));
             break;
     }
     // printf("POWER:  %f ",pow(2.0,((double) 2)/12));
@@ -205,7 +205,7 @@ bool is_rest(string s)
     //  returns "", not NULL.
     if (strlen(s) == 0)
     {
-       return true;
+        return true;
     }
     return false;
 }
