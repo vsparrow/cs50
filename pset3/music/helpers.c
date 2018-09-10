@@ -41,10 +41,10 @@ int duration(string fraction)
     c = c * 100;
     c = c / 25 * 2;
     int d = (int) round(c);
-    printf("[%f %i] ", c, d);
+    // printf("[%f %i] ", c, d);
     return d;
 
-    return 0;
+    // return 0;
 }
 
 // Calculates frequency (in Hz) of a note
@@ -68,7 +68,7 @@ int frequency(string note)
     //else no sharp or otive
     if (!sharp && !flat)
     {
-        printf("(octive in string is %c)", note[1]);
+        // printf("(octive in string is %c)", note[1]);
         // char temp = note[1] - 0;
         // octive = temp - 0;
         char temp[2];
@@ -81,7 +81,7 @@ int frequency(string note)
     }
     else
     {
-        printf("(octive in string is %c)", note[2]);
+        // printf("(octive in string is %c)", note[2]);
         // char temp = note[2] - 0;
         // octive = temp - 0;
         char temp[2];
@@ -91,10 +91,12 @@ int frequency(string note)
         noteOnly[0]=note[0];
         noteOnly[1]=note[1];
         noteOnly[2]='\0';
-        noteIntVal += note[1] - 0;
+        printf("\nBEFORE: %i",noteIntVal);
+        noteIntVal += (note[0] - 0);
+        printf("\nAFTER: %i\n",noteIntVal);
     }
 
-    printf("\nIN FRQUENCY:octive and Note: (%i) (%s)\n",octive,noteOnly);
+    // printf("\nIN FRQUENCY:octive and Note: (%i) (%s)\n",octive,noteOnly);
 
     //**********************************now calc the frquency
     //Only implement support initially for A0 through A8, no other notes.
@@ -109,12 +111,12 @@ int frequency(string note)
     {
         currentFreq = currentFreq / 2 / multiplyOrDivide;
     }
-    printf("(currentFreq is %i)", currentFreq);
+    // printf("(currentFreq is %i)", currentFreq);
 
-    printf("\n%i\n", 'C'-0); //67
-    printf("\n%i\n", 'C'-0 + '#' - 0);// 102
-    printf("\n%i\n",  '#' - 0); //35
-    printf("\n%i\n",  'b' - 0); //98
+    // printf("\n%i\n", 'C'-0); //67
+    // printf("\n%i\n", 'C'-0 + '#' - 0);// 102
+    // printf("\n%i\n",  '#' - 0); //35
+    // printf("\n%i\n",  'b' - 0); //98
     printf("NOTE IN VAL IS:  %i !!", noteIntVal);
     //order is:     //  c c#/db d d#/eb e f f#/gb g g#/Ab a a#/Bb b
     switch(noteIntVal)
@@ -161,8 +163,8 @@ int frequency(string note)
             currentFreq = ((double) currentFreq) / pow(2.0,((double) 9)/12);
             break;
     }
-    printf("POWER:  %f ",pow(2.0,((double) 2)/12));
-    printf("(FREQ after case is %i)", currentFreq);
+    // printf("POWER:  %f ",pow(2.0,((double) 2)/12));
+    // printf("(FREQ after case is %i)", currentFreq);
     // printf("(FREQ after case is %i)", currentFreq);
     //a#4 or a4
     //  note is a#4 or a
@@ -185,15 +187,15 @@ int frequency(string note)
     // more notes: octives start at c! so the order of octive 4 is cdrfgab  weird right!
 
     // TODO
-    printf("%s ",note);
+    // printf("%s ",note);
     return currentFreq;
-    return 0;
+    // return 0;
 }
 
 // Determines whether a string represents a rest
 bool is_rest(string s)
 {
-    printf("is_rest ");
+    // printf("is_rest ");
     // TODO
     // blank lines represent rests in our machine-readable format
     // What does it mean for a line to be blank?
@@ -213,11 +215,12 @@ int main(void)
     // int d = duration( "fraction");
     int d = duration( "1/4");
     // int f = frequency( "note");
-    int f = frequency( "A4");
+    int f = frequency( "A#5");
     bool r = is_rest( "");
     // bool r = is_rest(test1s);
 
-    printf("\n%i %i %d ", d, f, r);
-    printf("test\n");
+    printf("%i %i %d ", d, f, r);
+    printf("\n%i\n",f);
+    // printf("test\n");
     return 0;
 }
