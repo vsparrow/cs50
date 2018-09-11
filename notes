@@ -1,0 +1,13 @@
+24-bit BMP’s first 14 + 40 = 54 bytes are filled with metadata,
+The first of these headers, called BITMAPFILEHEADER, is 14 bytes long.
+    (Recall that 1 byte equals 8 bits.)
+The second of these headers, called BITMAPINFOHEADER, is 40 bytes long.
+
+Immediately following these headers is the actual bitmap:
+    an array of bytes, triples of which represent a pixel’s color.
+not need, we use 24 bmp ->            There’s an additional header right after BITMAPINFOHEADER called RGBQUAD,
+                                         an array that defines "intensity values" for each of the colors in a device’s palette.)
+
+BMP stores these triples backwards (i.e., as BGR), with 8 bits for blue, followed by 8 bits for green, 8 bits for red.
+
+hexadecimal digit represents 4 bits.  ffffff in hexadecimal actually signifies 111111111111111111111111 in binary.
