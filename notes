@@ -11,3 +11,4 @@ not need, we use 24 bmp ->            There’s an additional header right after
 BMP stores these triples backwards (i.e., as BGR), with 8 bits for blue, followed by 8 bits for green, 8 bits for red.
 
 hexadecimal digit represents 4 bits.  ffffff in hexadecimal actually signifies 111111111111111111111111 in binary.
+ 24-bit BMP (each of whose pixels is represented with 24 ÷ 8 = 3 bytes)
