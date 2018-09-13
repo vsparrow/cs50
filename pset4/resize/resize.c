@@ -72,16 +72,26 @@
 
 int main(int argc, char *argv[])
 {
+    //ARGUMENTS
     // ensure proper usage
-    if (argc != 3)
+    if (argc != 4)
     {
         fprintf(stderr, "Usage: copy infile outfile\n");
         return 1;
     }
 
+    // the first (n) must be a positive integer less than or equal to 100,
+    int n = atoi(argv[1]);
+    if (n < 1 || n > 100)
+    {
+        fprintf(stderr,"Integer for resize must be between 1 and 100\n");
+        return 1;
+    }
+    // the second must be the name of a BMP to be resized, and
+    // the third must be the name of the resized version to be written.
     // remember filenames
-    char *infile = argv[1];
-    char *outfile = argv[2];
+    char *infile = argv[2];
+    char *outfile = argv[3];
 
     // open input file
     FILE *inptr = fopen(infile, "r");
@@ -117,6 +127,41 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Unsupported file format.\n");
         return 4;
     }
+    //*******************************************************************
+    // bf = BITMAPFILEHEADER
+    // bi = BITMAPINFOHEADER
+    // printf("%d %d %d %d", bi.biSize, bi.biWidth, bi.biHeight, bi.biSizeImage);
+    printf("\nbi.biSize %d, bi.biWidth %d, bi.biHeight %d, bi.biSizeImage %d\n", bi.biSize, bi.biWidth, bi.biHeight, bi.biSizeImage);
+    //padding:
+    printf("\nbfOffBits: %d\n", bf.bfOffBits);  //offset where the bmp starts
+    printf("\nOLD: biWidth: %d",bi.biWidth);
+    printf("\nOLD: biHeight: %d",bi.biHeight);
+    //CALC PADDING OLD
+    int widthWithPadding = bi.biWidth; //
+    while(widthWithPadding % 4 != 0)
+    {
+        widthWithPadding++;
+    }
+    int oldPadding = widthWithPadding-bi.biWidth;
+    printf("\nOld widthWithPadding is %d || old padding is %d", widthWithPadding, oldPadding);
+    //get triples count
+    int newWidth = bi.biWidth * n;
+    int newHeight = bi.biHeight * n;
+    int newWidthWithPadding = newWidth;
+    while(newWidthWithPadding % 4 != 0)
+        newWidthWithPadding++;
+    int newPadding = newWidthWithPadding - newWidth;
+    printf("\nNew width will be: %i", newWidth);
+    printf("\nNew padding will be: %i", newPadding);
+    printf("\nNew hieght will be: %i", newHeight);
+    // biSizeImage = (biWidth * sizeof(RGBTRIPLE) + padding) * abs(biHeight)
+    int newBiSizeImage = (newWidth * sizeof(RGBTRIPLE) + newPadding) * abs(newHeight);
+    printf("\nNew BiSizeImage is %i, old was %i", newBiSizeImage,bi.biSizeImage);
+    // bfSize = biSizeImage + 54(biSize(40) aka BITMAPINFOHEADER + BITMAPFILEHEADER)
+    int newBfSize = newBiSizeImage + 54;
+    printf("\nNew bfsize = %i", newBfSize);
+    printf("\nalternate bfsize = %lu", newBiSizeImage + bi.biSize + sizeof(BITMAPFILEHEADER) );
+    //*******************************************************************
 
     // write outfile's BITMAPFILEHEADER
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
