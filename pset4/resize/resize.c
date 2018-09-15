@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     int n = atoi(argv[1]);
     if (n < 1 || n > 100)
     {
-        fprintf(stderr,"Integer for resize must be between 1 and 100\n");
+        fprintf(stderr, "Integer for resize must be between 1 and 100\n");
         return 1;
     }
 
@@ -66,14 +66,8 @@ int main(int argc, char *argv[])
     long oldHeight = bi.biHeight;
     long newHeight = bi.biHeight * n;
     //calc new padding for new biSizeImage
-    // int newPad = newWidth;
-    // while(newPad % 4 != 0)
-    //     newPad++;
-    // newPad = newPad - newWidth;
     int newPad = (4 - (newWidth * sizeof(RGBTRIPLE)) % 4) % 4;
-    // biSizeImage = (biWidth * sizeof(RGBTRIPLE) + padding) * abs(biHeight)
     int newBiSizeImage = (newWidth * sizeof(RGBTRIPLE) + newPad) * labs(newHeight);
-    // int newBfSize = newBiSizeImage + bf.bfOffBits; // which is 54
     int newBfSize = newBiSizeImage + 54; // which is 54
     //bi.biSize does not change, always 40
 
@@ -98,7 +92,7 @@ int main(int argc, char *argv[])
     for (int i = 0, biHeight = labs(oldHeight); i < biHeight; i++)
     {
         //duplicate line
-        for(int writeRowNtimes = 0; writeRowNtimes < n; writeRowNtimes++)
+        for (int writeRowNtimes = 0; writeRowNtimes < n; writeRowNtimes++)
         {
             // iterate over pixels in scanline
             for (int j = 0; j < oldWidth; j++)
@@ -110,16 +104,25 @@ int main(int argc, char *argv[])
                 fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
                 // write RGB triple to outfile n times
-                for(int writeNtimes = 0; writeNtimes < n; writeNtimes++)
+                for (int writeNtimes = 0; writeNtimes < n; writeNtimes++)
+                {
                     fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+                }
 
             }
+
             //add output padding, if any
             for (int k = 0; k < newPad; k++)
+            {
                 fputc(0x00, outptr);
+            }
+
             //JUMP BACK TO BEGINGING OF LINE HERE::
-            if(writeRowNtimes < n-1)
+            if (writeRowNtimes < n - 1)
+            {
                 fseek(inptr, -((int) sizeof(RGBTRIPLE) * oldWidth), SEEK_CUR);
+            }
+
         }
         // skip over input file padding, if any
         fseek(inptr, padding, SEEK_CUR);
